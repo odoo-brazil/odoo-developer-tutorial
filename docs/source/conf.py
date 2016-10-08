@@ -1,3 +1,4 @@
+import sphinx_bootstrap_theme
 # -*- coding: utf-8 -*-
 #
 # Odoo Brazil Developer Tutorial documentation build configuration file, created by
@@ -121,8 +122,8 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
-
+html_theme = 'bootstrap'
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
@@ -144,7 +145,7 @@ html_theme = 'alabaster'
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #
-# html_logo = None
+html_logo = "brazil.png"
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -338,3 +339,64 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #
 # texinfo_no_detailmenu = False
+html_theme_options = {
+    # A list of tuples containing pages or urls to link to.
+    # Valid tuples should be in the following forms:
+    #    (name, page)                 # a link to a page
+    #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
+    #    (name, "http://example.com", True) # arbitrary absolute url
+    # Note the "1" or "True" value above as the third argument to indicate
+    # an arbitrary url.
+    'navbar_links': [
+        (u"New Api Guidelines", "http://odoo-new-api-guide-line.readthedocs.io/", True),
+        (u"Oficial Doc", "https://www.odoo.com/documentation/", True),
+        (u"Odoo Brazil", "http://odoo-brasil.org", True),
+        (u"Odoo Community Association", "http://odoo-community.org/", True),
+    ],
+
+    # Render the next and previous page links in navbar. (Default: true)
+    'navbar_sidebarrel': True,
+
+    # Render the current pages TOC in the navbar. (Default: true)
+    'navbar_pagenav': False,
+
+    # Tab name for the current pages TOC. (Default: "Page")
+    'navbar_pagenav_name': "Page",
+
+    # Global TOC depth for "site" navbar tab. (Default: 1)
+    # Switching to -1 shows all levels.
+    'globaltoc_depth': 2,
+
+    # Include hidden TOCs in Site navbar?
+    #
+    # Note: If this is "false", you cannot have mixed ``:hidden:`` and
+    # non-hidden ``toctree`` directives in the same page, or else the build
+    # will break.
+    #
+    # Values: "true" (default) or "false"
+    'globaltoc_includehidden': "true",
+
+    # HTML navbar class (Default: "navbar") to attach to <div> element.
+    # For black navbar, do "navbar navbar-inverse"
+    'navbar_class': "navbar navbar-inverse",
+
+    # Fix navigation bar to top of page?
+    # Values: "true" (default) or "false"
+    'navbar_fixed_top': "true",
+
+    # Location of link to source.
+    # Options are "nav" (default), "footer" or anything else to exclude.
+    'source_link_position': "footer",
+
+    # Bootswatch (http://bootswatch.com/) theme.
+    #
+    # Options are nothing (default) or the name of a valid theme
+    # such as "amelia" or "cosmo".
+    'bootswatch_theme': "cosmo",
+
+    # Choose Bootstrap version.
+    # Values: "3" (default) or "2" (in quotes)
+    'bootstrap_version': "3",
+}
+
+
