@@ -23,4 +23,4 @@ install:
   - bin/buildout -N -t 20 -c travis.cfg
 
 script:
-  - bin/start_odoo
+  - bin/start_openerp
