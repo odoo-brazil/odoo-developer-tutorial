@@ -45,7 +45,7 @@ source_suffix = '.rst'
 
 # The encoding of source files.
 #
-# source_encoding = 'utf-8-sig'
+source_encoding = 'utf-8'
 
 # The master toctree document.
 master_doc = 'index'
@@ -136,7 +136,7 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = u'Odoo Brazil Developer Tutorial v0.0.0.1'
+html_title = u'Odoo Brazil Developer Tutorial v0.0.0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -347,12 +347,6 @@ html_theme_options = {
     #    (name, "http://example.com", True) # arbitrary absolute url
     # Note the "1" or "True" value above as the third argument to indicate
     # an arbitrary url.
-    'navbar_links': [
-        (u"New Api Guidelines", "http://odoo-new-api-guide-line.readthedocs.io/", True),
-        (u"Oficial Doc", "https://www.odoo.com/documentation/", True),
-        (u"Odoo Brazil", "http://odoo-brasil.org", True),
-        (u"Odoo Community Association", "http://odoo-community.org/", True),
-    ],
 
     # Render the next and previous page links in navbar. (Default: true)
     'navbar_sidebarrel': True,
@@ -378,7 +372,7 @@ html_theme_options = {
 
     # HTML navbar class (Default: "navbar") to attach to <div> element.
     # For black navbar, do "navbar navbar-inverse"
-    'navbar_class': "navbar navbar-inverse",
+#    'navbar_class': "navbar navbar-inverse",
 
     # Fix navigation bar to top of page?
     # Values: "true" (default) or "false"
