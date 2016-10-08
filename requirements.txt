@@ -18,7 +18,7 @@ pydot
 pyparsing < 2
 pyPdf
 pyserial
-python-dateutil < 2
+python-dateutil > 2.4.0
 # python-ldap
 python-openid
 pytz
