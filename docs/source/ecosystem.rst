@@ -1,4 +1,4 @@
-Ecossistema Odoo
-================
+Introdução ao Odoo e seu ecossistema
+====================================
 
 

@@ -6,7 +6,7 @@
 Seja bem vindo ao tutorial de desenvolvimento Odoo
 ==================================================
 
-Este é uma aula gratuita para quem quer se iniciar no Odoo e entende um pouco sobre Python e Orientação a Objetos mantida pela comunidade brasileira de Odoo. É uma introdução a desenvolvedores ao sistema de gestão empresarial Odoo. 
+Este é uma aula introdutória para quem quer se iniciar no desenvolvimento de modulos do Odoo e que enntende um pouco sobre Python e Orientação a Objetos. Mmantida pela comunidade brasileira de Odoo. 
 
 Pré-requisitos:
 
