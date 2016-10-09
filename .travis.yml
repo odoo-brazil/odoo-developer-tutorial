@@ -23,4 +23,5 @@ install:
   - bin/buildout -N -t 20 -c travis.cfg
 
 script:
-  - bin/start_openerp
+  - bin/test_openerp -d openerp_test -i open_academy
+
