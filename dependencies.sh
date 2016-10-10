@@ -1,8 +1,2 @@
-sudo apt-get install nodejs
-sudo apt-get install npm
-sudo apt-get install node-less
-#sudo npm install -g less
-#sudo npm install -g less-plugin-clean-css
-#sudo ln -s /usr/local/bin/lessc /usr/bin/lessc
-#sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt-get install nano python-virtualenv gcc python2.7-dev libxml2-dev libxslt1-dev libevent-dev libsasl2-dev libldap2-dev libpq-dev libpng12-dev libjpeg-dev node-less node-clean-css xfonts-75dpi xfonts-base
 
