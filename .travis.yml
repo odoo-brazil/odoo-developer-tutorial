@@ -26,4 +26,3 @@ install:
 
 script:
   - bin/test_openerp -d openerp_test -i open_academy
-
