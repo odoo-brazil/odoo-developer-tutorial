@@ -18,7 +18,6 @@ before_install:
   - mkdir -p $HOME/buildout-cache/{eggs,downloads}
   - virtualenv .
   - bin/pip install --upgrade pip setuptools zc.buildout
-  - bin/pip install -r requirements.txt
   - mv travis.cfg.in buildout.cfg 
 
 install:
