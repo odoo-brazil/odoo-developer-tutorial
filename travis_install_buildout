@@ -2,21 +2,19 @@
 
 set -e
 
-mkdir -p $HOME/buildout-cache/{eggs,downloads}
-virtualenv . --system-site-packages
-bin/pip install --upgrade pip setuptools zc.buildout
 
 # Install less
 ln -s `which nodejs` $HOME/maintainer-quality-tools/travis/node
 npm install -g less less-plugin-clean-css
 
+
+
 # Workaround to force using system site packages (see https://github.com/Shippable/support/issues/241#issuecomment-57947925)
 rm -f $VIRTUAL_ENV/lib/python2.7/no-global-site-packages.txt
-bin/pip install --user -q --no-binary pycparser -r $(dirname ${BASH_SOURCE[0]})/requirements.txt
-bin/pip install -q QUnitSuite coveralls codecov
+mkdir -p $HOME/buildout-cache/{eggs,downloads}
+virtualenv . --system-site-packages
+bin/pip install --upgrade pip setuptools zc.buildout
 
-# Use reference .coveragerc
-cp ${HOME}/maintainer-quality-tools/cfg/.coveragerc .
 mv travis.cfg.in buildout.cfg
 
 set +e
