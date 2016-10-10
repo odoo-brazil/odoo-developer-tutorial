@@ -1,4 +1,3 @@
-PyChart
 babel >= 1.0
 decorator
 docutils
@@ -35,3 +34,4 @@ vatnumber
 vobject
 werkzeug
 xlwt
+http://download.gna.org/pychart/PyChart-1.39.tar.gz
