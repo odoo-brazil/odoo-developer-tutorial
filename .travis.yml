@@ -1,24 +1,29 @@
 language: python
 
-sudo: required
-
 python:
-  - 2.7
+  - "2.7"
 
 cache:
   pip: true
   directories:
     - $HOME/buildout-cache
 
+addons:
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
+      - python-lxml  # because pip installation is slow
+
 env:
   - ODOO_VERSION=10 
 
+virtualenv:
+  system_site_packages: true
+
 before_install:
-  - ./dependencies.sh
-  - mkdir -p $HOME/buildout-cache/{eggs,downloads}
-  - virtualenv .
-  - bin/pip install --upgrade pip setuptools zc.buildout
-  - mv travis.cfg.in buildout.cfg 
+  - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  - ./travis_install_buildout
 
 install:
   - bin/buildout -N -t 20
