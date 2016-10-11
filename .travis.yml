@@ -33,5 +33,12 @@ script:
 
 after_success:
 
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - firefox --version
   - bin/travis-sphinx build
   - bin/travis-sphinx deploy
+  - cp robot/config_80.py_template config_80.py
+  - sed -i 's#ODOO_DB = "demo"#ODOO_DB = "openerp_test"#g' config_80.py
+  - bin/start_openerp &
+  - bin/pybot -v CONFIG:config_80.py robot/demo80.robot
