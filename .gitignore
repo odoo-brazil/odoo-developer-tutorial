@@ -61,10 +61,8 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+docs/build/
 
-# PyBuilder
-target/
 
 # IPython Notebook
 .ipynb_checkpoints
@@ -87,3 +85,14 @@ ENV/
 
 # Rope project settings
 .ropeproject
+.idea/
+.mr.developer.cfg
+bin/
+buildout.cfg
+etc/
+include/
+local/
+pip-selfcheck.json
+robot/
+src/anybox.recipe.odoo
+upgrade.py
