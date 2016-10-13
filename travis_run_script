@@ -13,6 +13,6 @@ if [ "${ROBOT}" != "0" ]; then
     exit 0
 fi
 
-bin/test_openerp -d openerp_test -i openacademy
+bin/test_openerp -d openerp_test -i open_academy
 
 set +e
