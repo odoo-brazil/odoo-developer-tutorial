@@ -1,6 +1,9 @@
 Instalação
 ==========
 
+Instalação
+----------
+
 1. Acesse: https://github.com/odoo-brazil/odoo-developer-tutorial
 2. Faça um fork do repositório
 3. Clone o seu fork e instale as dependências:
@@ -25,6 +28,8 @@ Crie um arquivo buildout.cfg com o conteúdo:
 
 .. literalinclude:: ../../buildout.cfg.in
    :linenos:
+
+.. nextslide::
 
 Execute o comando para realizar o download do Odoo e suas dependências:
 
