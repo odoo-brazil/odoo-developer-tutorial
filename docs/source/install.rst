@@ -3,7 +3,7 @@ Instalação
 
 1. Acesse: https://github.com/odoo-brazil/odoo-developer-tutorial
 2. Faça um fork do repositório
-3. Clone o seu fork:
+3. Clone o seu fork e instale as dependências:
 
 .. code-block:: shell
 
@@ -11,15 +11,10 @@ Instalação
     cd odoo-developer-tutorial
     sh dependencies.sh
 
-Dependencias
-############
-
-.. literalinclude:: ../../dependencies.sh
-   :language: sh
-   :linenos:
-
 Buildout
 ########
+
+Iniciando o buildout
 
 .. code-block:: shell
 
@@ -31,7 +26,7 @@ Crie um arquivo buildout.cfg com o conteúdo:
 .. literalinclude:: ../../buildout.cfg.in
    :linenos:
 
-Execute o comando para realizar o download do Odoo e suas dependencias:
+Execute o comando para realizar o download do Odoo e suas dependências:
 
 .. code-block:: shell
 
@@ -43,11 +38,6 @@ Inicie o odoo com:
 
     bin/start_odoo
 
-GIT
-###
-
-.. code-block:: shell
-
-    git config --global user.name "Your Name"
-    git config --global user.email youremail@example.com
-
+- Acesse: https://localhost:8069
+- Login: admin
+- senha: admin
