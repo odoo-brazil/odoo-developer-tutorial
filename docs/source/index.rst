@@ -33,6 +33,7 @@ Contents:
 Obrigado
 --------
 
+- telegram.me/odoobrazil
 - Luis Felipe Miléo <mileo@kmee.com.br>
 - @luisfelipemileo
 - github.com/mileo

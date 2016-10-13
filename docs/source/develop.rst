@@ -653,8 +653,273 @@ Mas somente nos singletons(apenas uma instancia de model). Setar um field dispar
 Exercicio: ipython
 ##################
 
+.. code-block:: python
+
+    bin/ipython_openerp     #execute na raiz do odoo
+    >>> group = self.env['res.groups'].search([])
+    >>> r = group.sorted(key=lambda r: r.name)
+    >>> for b in r:
+    ...     b.name
+    ...
+    u'Access Rights'
+    u'Contact Creation'
+    u'Employee'
+    u'Manager'
+    u'Multi Companies'
+    u'Multi Currencies'
+    u'Notes / Fancy mode'
+    u'Portal'
+    u'Public'
+    u'Settings'
+    u'Shared Group'
+    u'Technical Features'
+    u'User'
+    u'User
 
 
+.. nextslide::
+
+Filtrando recordsets: ::
+
+    recset.filtered(lambda record: record.company_id == user.company_id)
+    # or using string
+    recset.filtered("product_id.can_be_sold")
+
+Ordenando: ::
+
+    # sort records by name
+    recset.sorted(key=lambda r: r.name)
+
+.. nextslide::
+
+Map: ::
+
+    recset.mapped(lambda record: record.price_unit - record.cost_price)
+
+    # returns a list of name
+    recset.mapped('name')
+
+    # returns a recordset of partners
+    recset.mapped('invoice_id.partner_id')
+
+.. nextslide::
+
+Example::
+
+   >>> g.mapped('users')
+   res.users(1, 4)
+
+   >>> g.mapped('name')
+   [u'Access Rights', u'Contact Creation', u'Employee', u'Manager',
+   u'Multi Companies', u'Multi Currencies', u'Notes / Fancy mode', u'Portal',
+   u'Public', u'Settings', u'Shared Group', u'Technical Features', u'User',
+   u'User']
 
 
+O atributo ids
+--------------
+
+Ids é um atributo especial do recorset. ::
+
+   >>> groups.ids
+   [3, 11, 5, 10, 6, 7, 12, 1, 2, 4, 14, 8, 9, 13]
+   >>> groups
+   res.groups(3, 11, 5, 10, 6, 7, 12, 1, 2, 4, 14, 8, 9, 13)
+
+
+Acões comuns
+============
+
+Pesquisa
+--------
+
+.. code-block:: python
+
+    >>> self.search([('is_company', '=', True)])
+    res.partner(7, 6, 18, 12, 14, 17, 19, 8,...)
+    >>> self.search([('is_company', '=', True)])[0].name
+    'Camptocamp'
+    >>> self.env['res.users'].search([('login', '=', 'admin')])
+    res.users(1,)
+
+.. nextslide::
+
+Exemplo
+
+.. code-block:: python
+
+In [59]: partner.search([], order='name', limit=10)
+   Out[59]: res.partner(31, 30, 29, 28, 27, 26, 24, 23, 22, 21)
+
+   In [63]: partner.search([], limit=10, offset=20)
+   Out[63]: res.partner(12, 13, 14, 15, 18, 16, 38, 53, 52, 39)
+
+   In [64]: partner.search([], limit=10, offset=10)
+   Out[64]: res.partner(20, 19, 18, 17, 16, 15, 14, 13, 12, 11)
+
+   In [68]: obj = partner.search([], limit=1)
+
+   In [69]: obj.name
+   Out[69]: u'EMPRESA'
+
+.. code-block:: python
+
+   # Todos os registros utilizamos o dominio vazio.
+   In [72]: partner.search([])
+   Out[72]: res.partner(9, 6, 1, 8, 7, 10, 11, 12, 13, 14, 15, 18, 16, 19, 17, 20, 23, 24, 21, 22, 26, 27, 28, 29, 30, 31, 35, 43, 32, 33, 48, 49, 51, 38, 40, 41, 45, 42, 59, 57, 58, 63, 64, 65, 47, 50, 60, 54, 55, 56, 62, 44, 34, 66, 68, 69, 39, 52, 53, 67, 46, 37, 36, 61, 3, 5, 70, 72, 71)
+
+Tipos de operadores
+
+.. code-block:: python
+
+   '=', '!=', '<=', '<', '>', '>=', '=?', '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 'in', 'not in', 'child_of'
+
+
+Browsing
+--------
+Browsing é o forma padrão de se retornar dados do banco de dados, ele retorna um recordset: ::
+
+    >>> self.browse([1, 2, 3])
+    res.partner(1, 2, 3)
+
+
+Writing
+-------
+
+**Using Active Record pattern**
+
+.. code-block:: python
+
+    @api.one
+    def any_write(self):
+      self.x = 1
+      self.name = 'a'
+
+From Record
+-----------
+
+.. code-block:: python
+
+    @api.one
+    ...
+    self.write({'key': value })
+    # or
+    record.write({'key': value})
+
+
+From RecordSet
+--------------
+
+.. code-block:: python
+
+    @api.multi
+    ...
+    self.write({'key': value })
+    # It will write on all record.
+    self.line_ids.write({'key': value })
+
+It will write on all Records of the relation line_ids
+
+Exercicio: Relacionamentos entre modelos
+########################################
+
+Crie um modelo para sessao do curso:
+- Um curso pode ser ministrado em determinada data;
+- Um curso deve ter um alunos inscritos alvo;
+
+Cada sessão deve ter:
+- Um nome;
+- Um número de lugares;
+- Uma data de início;
+- Duração em dias;
+
+* Adicione uma ação e um item de menu para exibi-los.
+
+.. code-block:: python
+
+    class Session(models.Model):
+        _name = 'openacademy.session'
+
+        name = fields.Char(required=True)
+        start_date = fields.Date()
+        duration = fields.Float(digits=(6, 2), help="Duration in days")
+        seats = fields.Integer(string="Number of seats")
+
+.. nextslide::
+
+.. code-block:: xml
+
+        <record model="ir.ui.view" id="session_form_view">
+            <field name="name">session.form</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <form string="Session Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="session_list_action">
+            <field name="name">Sessions</field>
+            <field name="res_model">openacademy.session</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="session_menu" name="Sessions"
+                  parent="openacademy_menu"
+                  action="session_list_action"/>
+
+Exercicio: Relacionamentos Many2One
+###################################
+
+Adicone um relacionamento many2one entre Curso e Sessão.
+    - Um curso deve ter um usuário responsável. Para tal deve ter um relacionamento com o modelo embutido res.users.
+    - A sessão deve ter um instrutor, Para tal deve ter um relacionamento com o modelo embutido res.partner.
+    - Uma sessão deve ser relacionada a um curso. Para tal deve ter um relacionamento com o modelo que criamos openacademy.course.
+
+Adapte os modelos e as visões.
+
+.. code-block:: python
+
+    class Course(models.Model):
+        [...]
+        responsible_id = fields.Many2one('res.users',
+            ondelete='set null', string="Responsible", index=True)
+        [...]
+    class Session(models.Model):
+        [...]
+            instructor_id = fields.Many2one('res.partner', string="Instructor")
+            course_id = fields.Many2one('openacademy.course',
+                ondelete='cascade', string="Course", required=True)
+
+Exercicio: Relacionamentos One2Many
+###################################
+
+Relacionamento inverso entre curso e sessões:
+
+.. code-block:: python
+
+    class Course(models.Model):
+        [...]
+        responsible_id = fields.Many2one('res.users',
+            ondelete='set null', string="Responsible", index=True)
+        session_ids = fields.One2many(
+            'openacademy.session', 'course_id', string="Sessions")
+
+Exercicio: Relacionamentos Many2Many
+####################################
+
+Relacionamento entre Parceiros e Sessões:
+
+.. code-block:: python
+
+    attendee_ids = fields.Many2many('res.partner', string="Attendees")
 
