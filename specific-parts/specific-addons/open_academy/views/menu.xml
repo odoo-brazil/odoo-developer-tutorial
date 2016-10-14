@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+        <data>
+		<act_window
+		   id="openacademy_course_action"
+		   name="Cursos"
+                   res_model="openacademy.course"/>
+
+		<menuitem
+		   id="openacademy_menu"
+		   name="Curso"
+		   action="openacademy_course_action"
+		   parent=""
+		   sequence="5"/>	
+	</data>
+</openerp>
