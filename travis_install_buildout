@@ -17,4 +17,5 @@ bin/pip install --upgrade pip setuptools zc.buildout
 
 mv travis.cfg.in buildout.cfg
 
+mkdir output
 set +e

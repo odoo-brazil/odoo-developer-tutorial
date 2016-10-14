@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -e -x
 
 if [ "${DOC}" != "0" ]; then
     bin/travis-sphinx build
@@ -8,11 +8,15 @@ if [ "${DOC}" != "0" ]; then
 fi
 
 if [ "${ROBOT}" != "0" ]; then
-    cp robot/config_80.py_template config_80.py
-    sed -i 's#ODOO_DB = "demo"#ODOO_DB = "openerp_test"#g' config_80.py
+    cp robot/config_80.py_template robot/config_80.py
+    wget https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-linux64.tar.gz
+    mkdir -p ~/bin/
+    tar -zxvf geckodriver*.tar.gz -C /home/travis/bin
+    export PATH=/home/$USER/bin/geckodriver:$PATH
+    sed -i 's#ODOO_DB = "demo"#ODOO_DB = "openerp_test"#g' robot/config_80.py
     exit 0
 fi
 
 bin/test_openerp -d openerp_test -i open_academy
 
-set +e
+set +e +x
