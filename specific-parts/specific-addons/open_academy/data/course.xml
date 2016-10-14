@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model='openacademy.course' id='my_course_00'>
+		     <field name="name">Course 0</field>
+		     <field name="description">Curso de python</field>
+		</record>
+		<record model='openacademy.course' id='my_course_01'>
+		     <field name="name">Course 1</field>
+		     <field name="description">Curso de python</field>
+		</record>
+		<record model='openacademy.course' id='my_course_02'>
+		     <field name="name">Course 2</field>
+		     <field name="description">Curso de python</field>
+		</record>
+	</data>
+</openerp>
+
