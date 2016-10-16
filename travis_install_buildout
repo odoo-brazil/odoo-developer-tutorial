@@ -7,8 +7,6 @@ set -e
 ln -s `which nodejs` $HOME/maintainer-quality-tools/travis/node
 npm install -g less less-plugin-clean-css
 
-
-
 # Workaround to force using system site packages (see https://github.com/Shippable/support/issues/241#issuecomment-57947925)
 rm -f $VIRTUAL_ENV/lib/python2.7/no-global-site-packages.txt
 mkdir -p $HOME/buildout-cache/{eggs,downloads}
@@ -17,5 +15,17 @@ bin/pip install --upgrade pip setuptools zc.buildout
 
 mv travis.cfg.in buildout.cfg
 
-mkdir output
+if [ "${ROBOT}" != "0" ]; then
+  export CHROME_BIN=/usr/bin/google-chrome
+  export DISPLAY=:99.0
+  sh -e /etc/init.d/xvfb start
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo dpkg -i google-chrome*.deb
+  wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
+  mkdir -p ~/bin/
+  unzip -d ~/bin/ chromedriver_linux64.zip
+  export PATH=/home/$USER/bin/chromedriver:$PATH
+  mkdir output
+fi
+
 set +e
