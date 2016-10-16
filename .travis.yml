@@ -1,7 +1,10 @@
 language: python
+dist: trusty
 
 python:
   - "2.7"
+
+sudo: required
 
 cache:
   pip: true
@@ -13,6 +16,10 @@ addons:
     packages:
       - expect-dev  # provides unbuffer utility
       - python-lxml  # because pip installation is slow
+      - libappindicator1
+      - fonts-liberation
+      - chromium-browser
+      - chromium-chromedriver
 
 env:
   - VERSION="9.0" DOC="0" ROBOT="0"
@@ -23,11 +30,11 @@ virtualenv:
   system_site_packages: true
 
 before_install:
-  - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
-  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - firefox --version
+  - sleep 5
+  - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - ./travis_install_buildout
 
 install:

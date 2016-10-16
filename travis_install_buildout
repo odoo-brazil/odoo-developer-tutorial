@@ -16,16 +16,11 @@ bin/pip install --upgrade pip setuptools zc.buildout
 mv travis.cfg.in buildout.cfg
 
 if [ "${ROBOT}" != "0" ]; then
-  export CHROME_BIN=/usr/bin/google-chrome
-  export DISPLAY=:99.0
-  sh -e /etc/init.d/xvfb start
-  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  sudo dpkg -i google-chrome*.deb
-  wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
-  mkdir -p ~/bin/
-  unzip -d ~/bin/ chromedriver_linux64.zip
-  export PATH=/home/$USER/bin/chromedriver:$PATH
-  mkdir output
+    wget http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip
+    unzip chromedriver_linux64.zip
+    sudo chmod u+x chromedriver
+    sudo mv chromedriver /usr/bin/
+    createdb fakedb
 fi
 
 set +e
