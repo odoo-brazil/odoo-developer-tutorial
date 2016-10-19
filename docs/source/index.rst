@@ -6,7 +6,7 @@
 Tutorial Odoo
 =============
 
-Open Source ERP - Como instalar e desenvolver aplicações empresariais
+Open Source ERP - Como instalar e desenvolver aplicações empresariais!
 
 Tutorial Odoo
 -------------
