@@ -11,7 +11,7 @@ Open Source ERP - Como instalar e desenvolver aplicações empresariais
 Tutorial Odoo
 -------------
 
-Este é uma aula introdutória para quem quer se iniciar no desenvolvimento de modulos do Odoo e que entende um pouco sobre Python e Orientação a Objetos. Mmantida pela comunidade brasileira de Odoo.
+Este é uma aula introdutória para quem quer se iniciar no desenvolvimento de modulos do Odoo e que entende um pouco sobre Python e Orientação a Objetos. Mantida pela comunidade brasileira de Odoo.
 
 Pré-requisitos:
 
