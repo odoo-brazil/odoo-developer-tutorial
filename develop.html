@@ -1,0 +1,989 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introdução a Criação de modulos &#8212; Tutorial Odoo 2016.10.13 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/oca.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.10.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Tutorial Odoo 2016.10.13 documentation" href="index.html" />
+    <link rel="next" title="Links importantes" href="links.html" />
+    <link rel="prev" title="Instalação" href="install.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/brazil.png"></span>
+          Tutorial Odoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>2016.10.13</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Sobre o Odoo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#o-odoo">O Odoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#historia">História</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#oca">OCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#desenvolvendo-com-odoo">Desenvolvendo com Odoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#exemplo-backend-views">Exemplo: Backend Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#backend-code-models">Backend Code: Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#backend-code-views">Backend Code: Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#frontend-views">Frontend Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#front-end-code-rotas">Front-End Code: Rotas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#front-end-code-views">Front-End Code: Views</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Instalação</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#id1">Instalação</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introdução a Criação de modulos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#objetivo">Objetivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arquivo-de-manifesto">Arquivo de Manifesto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estrutura-de-arquivos-do-modulo">Estrutura de arquivos do modulo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mapeamento-objeto-relacional">Mapeamento Objeto relacional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-fields">Model Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dados">Dados:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adicionando-acoes-e-menus">Adicionando Ações e menus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#defina-um-visoes-personalizado">Defina um visões personalizado.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recordset">Recordset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#o-atributo-ids">O atributo ids</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#acoes-comuns">Acões comuns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pesquisa">Pesquisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#browsing">Browsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing">Writing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#from-record">From Record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#from-recordset">From RecordSet</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links importantes</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="install.html" title="Previous Chapter: Instalação"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Instalação</span>
+    </a>
+  </li>
+  <li>
+    <a href="links.html" title="Next Chapter: Links importantes"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Links importa... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="introducao-a-criacao-de-modulos">
+<h1>Introdução a Criação de modulos<a class="headerlink" href="#introducao-a-criacao-de-modulos" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="objetivo">
+<h2>Objetivo<a class="headerlink" href="#objetivo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Entender como um modulo do tipo backend Odoo é estruturado;</li>
+<li>Como realizar o desenvolvimento incremental do mesmo;</li>
+<li>Desenvolvimento Orientado a Testes (TDD);</li>
+</ul>
+<div class="section" id="criando-e-instalando-um-novo-modulo">
+<h3>Criando e instalando um novo modulo<a class="headerlink" href="#criando-e-instalando-um-novo-modulo" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="nb">cd</span> specific-parts
+mkdir open_academy
+<span class="nb">cd</span> open_academy
+touch __init__.py
+nano __openerp__.py
+</pre></div>
+</div>
+<ul class="simple">
+<li>Adicione no aquivo __openerp__.py um dicionário</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Open Academy&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="instalando-o-modulo">
+<h3>Instalando o módulo:<a class="headerlink" href="#instalando-o-modulo" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Inicie o odoo</li>
+<li>Ative o modo desenvolvedor</li>
+<li>Acesse configurações &gt; Atualizar lista de modulos ( Devemos fazer isso sempre que um novo modulo é disponibilizado em um banco de dados )</li>
+<li>Procure seu modulo na lista de modulos e o instale-o.</li>
+</ol>
+</div>
+<div class="section" id="definicoes">
+<h3>Definições:<a class="headerlink" href="#definicoes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Um modulo odoo é um diretório contendo arquivos;</li>
+<li>O nome da pasta é o nome tecnico;</li>
+<li>O &#8216;name&#8217; definido no dicionário do manifesto é o Titulo do modulo.</li>
+<li>O arquivo __openerp__.py é o manifesto do modulo. Ele contem um dicionário com os detalhes do modulo: descrição, dependencias, data que deve ser carregada e etc;</li>
+<li>O diretorio deve ser importável pelo python, ou seja ter um arquivo __init__.py mesmo que vazio. Ele tambem pode conter os modulos python e submodulos que devem ser importados.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="arquivo-de-manifesto">
+<h2>Arquivo de Manifesto<a class="headerlink" href="#arquivo-de-manifesto" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Preencha seu arquivo de manifesto com as chaves mais significativas conforme o exemplo:</li>
+</ol>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s2">&quot;Title&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="s2">&quot;Short subtitle phrase&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;Long description&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="s2">&quot;Your name&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;license&#39;</span><span class="p">:</span> <span class="s2">&quot;AGPL-3&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;website&#39;</span><span class="p">:</span> <span class="s2">&quot;http://www.example.com&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="s1">&#39;Uncategorized&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;8.0.1.0.0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;depends&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;base&#39;</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>O trecho -<em>- coding: utf-8 -</em>- permite que utilizemos caracteres não ASCII no arquivo.</li>
+<li><strong>name:</strong> O titulo do modulo</li>
+<li><strong>summary:</strong> Um subtitulo com uma linha</li>
+<li><strong>description:</strong> Deve ser escrito no padrão <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickstart.html">ReStructuredText</a></li>
+<li><strong>author:</strong> O nome dos autores separados por virgula.</li>
+<li><strong>license:</strong> AGPL-3 , LGPL-3 , Other OSI approved license etc.</li>
+<li><strong>website:</strong> Url para dar mais informações sobre os autores</li>
+<li><strong>category:</strong> <a class="reference external" href="https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml">Lista de categorias possiveis</a></li>
+</ul>
+<ul class="simple">
+<li><strong>versao:</strong> Versão do modulo</li>
+<li><strong>depends:</strong> É uma lista de com os nomes tecnicos que este modulo depende.</li>
+</ul>
+<p><strong>Importante:</strong> Se não depender de nenhum modulo, ao menos deve depender do modulo <strong>base</strong></p>
+<p>Qualquer referencia que seu modulo realize com xmls ids, visões ou modelos refenciados por este modulo.</p>
+<p>Esta lista garante que tudo será carregado na ordem correta.</p>
+<ul class="simple">
+<li><strong>data:</strong> Lista dos caminhos dos arquivos de dados</li>
+<li><strong>demo:</strong> Lista dos caminhos dos arquivos de demo</li>
+</ul>
+</div>
+<div class="section" id="estrutura-de-arquivos-do-modulo">
+<h2>Estrutura de arquivos do modulo<a class="headerlink" href="#estrutura-de-arquivos-do-modulo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>.
+├── __init__.py
+├── __openerp__.py
+│
+├── controllers
+│
+└── __init__.py
+├── data
+├── i18n
+├── models
+│
+└── __init__.py
+├── security
+├── static
+│
+└── description
+└── views
+</pre></div>
+</div>
+<p>Um modudo Odoo pode conter três tipos de aquivos:</p>
+<ul class="simple">
+<li>Arquivos python</li>
+<li>Arquivos de dados: XML / CSV / YML</li>
+<li>Arquivos Web: Css / Qweb / HTML</li>
+</ul>
+</div>
+<div class="section" id="mapeamento-objeto-relacional">
+<h2>Mapeamento Objeto relacional<a class="headerlink" href="#mapeamento-objeto-relacional" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Model é uma representação de um objeto de negócio, eles podem ser persistentes e abstratos:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="o">...</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">AbstractMethod</span><span class="p">):</span>
+    <span class="o">...</span>
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">TransientMethod</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Modelos Odoo são objetos derivados da classe Odoo Model.</li>
+<li>Quando um novo modulo é definido ele é adicionado a tabela de modelos (ir_model)</li>
+</ul>
+<ul class="simple">
+<li>Modelos tem alguns atributos definidos com underline. O mais importante é o _name que define um identificador unico do modelo na intancia</li>
+<li>As mudanças nos Modelos são carregadas quando atualizamos os modulos;</li>
+</ul>
+<ul class="simple">
+<li>A camada de ORM do Odoo evita que seja necessário escrever SQL;</li>
+<li>As classes python que extendem Models, se tornam automaticamente persistentes;</li>
+</ul>
+</div>
+<div class="section" id="model-fields">
+<h2>Model Fields<a class="headerlink" href="#model-fields" title="Permalink to this headline">¶</a></h2>
+<p>Os campos de um modelo definiem o que pode ser armazenado e onde. Fields são definidos como atributos da classe.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openerp</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fields</span>
+
+<span class="k">class</span> <span class="nc">AModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;a_name&#39;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">(</span>
+        <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span>                   <span class="c1"># Optional label of the field</span>
+        <span class="n">compute</span><span class="o">=</span><span class="s2">&quot;_compute_name_custom&quot;</span><span class="p">,</span>  <span class="c1"># Transform the fields in computed fields</span>
+        <span class="n">store</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>                      <span class="c1"># If computed it will store the result</span>
+        <span class="n">select</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>                     <span class="c1"># Force index on field</span>
+        <span class="n">readonly</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>                   <span class="c1"># Field will be readonly in views</span>
+        <span class="n">inverse</span><span class="o">=</span><span class="s2">&quot;_write_name&quot;</span>            <span class="c1"># On update trigger</span>
+        <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>                   <span class="c1"># Mandatory field</span>
+        <span class="n">translate</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>                  <span class="c1"># Translation enable</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;blabla&#39;</span><span class="p">,</span>                   <span class="c1"># Help tooltip text</span>
+        <span class="n">company_dependent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>          <span class="c1"># Transform columns to ir.property</span>
+        <span class="n">search</span><span class="o">=</span><span class="s1">&#39;_search_function&#39;</span>        <span class="c1"># Custom search function mainly used with compute</span>
+    <span class="p">)</span>
+   <span class="c1"># The string key is not mandatory by default it wil use the property name Capitalized</span>
+   <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">()</span>  <span class="c1">#  Valid definition</span>
+</pre></div>
+</div>
+<div class="section" id="tipos-de-campos">
+<h3>Tipos de campos<a class="headerlink" href="#tipos-de-campos" title="Permalink to this headline">¶</a></h3>
+<p><strong>Boolean</strong></p>
+<p>Boolean type field:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">abool</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Boolean</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Char</strong></p>
+<p>Store string with variable len.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">achar</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Specific options:</p>
+<ul class="simple">
+<li>size: data will be trimmed to specified size</li>
+<li>translate: field can be translated</li>
+</ul>
+<p><strong>Text</strong></p>
+<p>Used to store long text.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">atext</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Text</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Specific options:</p>
+<ul class="simple">
+<li>translate: field can be translated</li>
+</ul>
+<p><strong>HTML</strong></p>
+<p>Used to store HTML, provides an HTML widget.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">anhtml</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Html</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Integer</strong></p>
+<p>Store integer value. No NULL value support. If value is not set it returns 0:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">anint</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Float</strong></p>
+<p>Store float value. No NULL value support. If value is not set it returns 0.0
+If digits option is set it will use numeric type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">afloat</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Float</span><span class="p">()</span>
+<span class="n">afloat</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
+<span class="n">afloat</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="k">lambda</span> <span class="n">cr</span><span class="p">:</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Date</strong></p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">openerp</span> <span class="k">import</span> <span class="n">fields</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+<span class="go">&#39;2014-06-15&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">context_today</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="go">&#39;2014-06-15&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">context_today</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="go">&#39;2014-06-15&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
+<span class="go">datetime.datetime(2014, 6, 15, 19, 32, 17)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">())</span>
+<span class="go">&#39;2014-06-15&#39;</span>
+</pre></div>
+</div>
+<p><strong>DateTime</strong></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">context_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="go">datetime.datetime(2014, 6, 15, 21, 26, 1, 248354, tzinfo=&lt;DstTzInfo &#39;Europe/Brussels&#39; CEST+2:00:00 DST&gt;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="go">&#39;2014-06-15 19:26:13&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="go">datetime.datetime(2014, 6, 15, 19, 32, 17)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="go">&#39;2014-06-15 19:26:13&#39;</span>
+</pre></div>
+</div>
+<p><strong>Binary</strong></p>
+<p>Store file encoded in base64 in bytea column:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">abin</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Binary</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Selection</strong></p>
+<p>Store text in database but propose a selection widget.
+It induces no selection constraint in database.
+Selection must be set as a list of tuples or a callable that returns a list of tuples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aselection</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Selection</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)])</span>
+<span class="n">aselection</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Selection</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)])</span>
+<span class="n">aselection</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Selection</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="s1">&#39;a_function_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When extending a model, if you want to add possible values to a selection field,
+you may use the <cite>selection_add</cite> keyword argument:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_inherits</span> <span class="o">=</span> <span class="s1">&#39;some.model&#39;</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Selection</span><span class="p">(</span><span class="n">selection_add</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;10ª opção&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;11ª opção&#39;</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p><strong>Reference</strong></p>
+<p>Store an arbitrary reference to a model and a row:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">aref</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Reference</span><span class="p">([(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="s1">&#39;String&#39;</span><span class="p">)])</span>
+<span class="n">aref</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Reference</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;model_name&#39;</span><span class="p">,</span> <span class="s1">&#39;String&#39;</span><span class="p">)])</span>
+<span class="n">aref</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Reference</span><span class="p">(</span><span class="n">selection</span><span class="o">=</span><span class="s1">&#39;a_function_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Specific options:</p>
+<ul class="simple">
+<li>selection: a list of tuple or a callable name that take recordset as input</li>
+</ul>
+<p><strong>Many2one</strong></p>
+<p>Store a relation against a co-model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">arel_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="s1">&#39;res.users&#39;</span><span class="p">)</span>
+<span class="n">arel_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="n">comodel_name</span><span class="o">=</span><span class="s1">&#39;res.users&#39;</span><span class="p">)</span>
+<span class="n">an_other_rel_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="n">comodel_name</span><span class="o">=</span><span class="s1">&#39;res.partner&#39;</span><span class="p">,</span> <span class="n">delegate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>One2many</strong></p>
+<p>Store a relation against many rows of co-model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">arel_ids</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">One2many</span><span class="p">(</span><span class="s1">&#39;res.users&#39;</span><span class="p">,</span> <span class="s1">&#39;rel_id&#39;</span><span class="p">)</span>
+<span class="n">arel_ids</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">One2many</span><span class="p">(</span><span class="n">comodel_name</span><span class="o">=</span><span class="s1">&#39;res.users&#39;</span><span class="p">,</span> <span class="n">inverse_name</span><span class="o">=</span><span class="s1">&#39;rel_id&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Many2many</strong></p>
+<p>Store a relation against many2many rows of co-model:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">arel_ids</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2many</span><span class="p">(</span><span class="s1">&#39;res.users&#39;</span><span class="p">)</span>
+<span class="n">arel_ids</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2many</span><span class="p">(</span><span class="n">comodel_name</span><span class="o">=</span><span class="s1">&#39;res.users&#39;</span><span class="p">,</span>
+                            <span class="n">relation</span><span class="o">=</span><span class="s1">&#39;table_name&#39;</span><span class="p">,</span>
+                            <span class="n">column1</span><span class="o">=</span><span class="s1">&#39;col_name&#39;</span><span class="p">,</span>
+                            <span class="n">column2</span><span class="o">=</span><span class="s1">&#39;other_col_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-adicionando-modelos">
+<h3>Exercicio: Adicionando modelos<a class="headerlink" href="#exercicio-adicionando-modelos" title="Permalink to this headline">¶</a></h3>
+<p>Crie um arquivo na pasta models, chamado de course.py com o conteudo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">openerp</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">api</span>
+
+<span class="k">class</span> <span class="nc">Course</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;openacademy.course&#39;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Text</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Crie um arquivo __init__.py na pasta models importando o seu modulo:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">course</span>
+</pre></div>
+</div>
+<p>Edite o arquivo __init__.py da raiz para importar a pasta models:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">models</span>
+</pre></div>
+</div>
+<p>Atualize seu modulo e verifique o banco de dados foi alterado e as tabelas de dados.</p>
+</div>
+</div>
+<div class="section" id="dados">
+<h2>Dados:<a class="headerlink" href="#dados" title="Permalink to this headline">¶</a></h2>
+<p>Depois que um módulo Odoo é carregado a maioria dos arquivos é convertida em dados e salva no banco de dados da instância. Representando:</p>
+<ul class="simple">
+<li>Os módulos instalados;</li>
+<li>Os modelos desses módulos;</li>
+<li>Os campos desses módulos;</li>
+<li>Dados pré inseridos;</li>
+<li>Dados de demonstração;</li>
+<li>Visões, Filtros padrão;</li>
+<li>Relatórios;</li>
+<li>ETC;</li>
+</ul>
+<div class="section" id="exercicio-adicionando-dados-de-demonstracao">
+<h3>Exercicio: Adicionando dados de demonstração<a class="headerlink" href="#exercicio-adicionando-dados-de-demonstracao" title="Permalink to this headline">¶</a></h3>
+<p>Crie um arquivo openacademy/demo/demo.xml para incluir alguns dados:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;openerp&gt;</span>
+    <span class="nt">&lt;data&gt;</span>
+        <span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;openacademy.course&quot;</span> <span class="na">id=</span><span class="s">&quot;course0&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Course 0<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span><span class="nt">&gt;</span>Course 0&#39;s description
+
+Can have multiple lines
+            <span class="nt">&lt;/field&gt;</span>
+        <span class="nt">&lt;/record&gt;</span>
+        <span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;openacademy.course&quot;</span> <span class="na">id=</span><span class="s">&quot;course1&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Course 1<span class="nt">&lt;/field&gt;</span>
+            <span class="c">&lt;!-- no description for this one --&gt;</span>
+        <span class="nt">&lt;/record&gt;</span>
+        <span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;openacademy.course&quot;</span> <span class="na">id=</span><span class="s">&quot;course2&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Course 2<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span><span class="nt">&gt;</span>Course 2&#39;s description<span class="nt">&lt;/field&gt;</span>
+        <span class="nt">&lt;/record&gt;</span>
+    <span class="nt">&lt;/data&gt;</span>
+<span class="nt">&lt;/openerp&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="adicionando-acoes-e-menus">
+<h2>Adicionando Ações e menus<a class="headerlink" href="#adicionando-acoes-e-menus" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Ações e menus são dados regularmente inseridos no banco de dados;</li>
+</ul>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;openerp&gt;</span>
+    <span class="nt">&lt;data&gt;</span>
+        <span class="nt">&lt;act_window</span>
+            <span class="na">id=</span><span class="s">&quot;meu_modulo_action&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;Minha Ação&quot;</span>
+            <span class="na">res_model=</span><span class="s">&quot;meu.modulo&quot;</span> <span class="nt">/&gt;</span>
+
+        <span class="nt">&lt;menuitem</span>
+            <span class="na">id=</span><span class="s">&quot;meu_modulo_menu&quot;</span>
+            <span class="na">name=</span><span class="s">&quot;Meu Menu&quot;</span>
+            <span class="na">action=</span><span class="s">&quot;meu_modulo_action&quot;</span>
+            <span class="na">parent=</span><span class="s">&quot;&quot;</span>
+            <span class="na">sequence=</span><span class="s">&quot;5&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/data&gt;</span>
+<span class="nt">&lt;/openerp&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="exercicio-definindo-acoes-e-menus">
+<h3>Exercicio: Definindo ações e menus<a class="headerlink" href="#exercicio-definindo-acoes-e-menus" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;openerp&gt;</span>
+    <span class="nt">&lt;data&gt;</span>
+        <span class="c">&lt;!-- window action --&gt;</span>
+        <span class="c">&lt;!--</span>
+<span class="c">            The following tag is an action definition for a &quot;window action&quot;,</span>
+<span class="c">            that is an action opening a view or a set of views</span>
+<span class="c">        --&gt;</span>
+        <span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;ir.actions.act_window&quot;</span> <span class="na">id=</span><span class="s">&quot;course_list_action&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Courses<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;res_model&quot;</span><span class="nt">&gt;</span>openacademy.course<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;view_type&quot;</span><span class="nt">&gt;</span>form<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;view_mode&quot;</span><span class="nt">&gt;</span>tree,form<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;help&quot;</span> <span class="na">type=</span><span class="s">&quot;html&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">&quot;oe_view_nocontent_create&quot;</span><span class="nt">&gt;</span>Create the first course
+                <span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;/field&gt;</span>
+        <span class="nt">&lt;/record&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span></span>        <span class="c">&lt;!-- top level menu: no parent --&gt;</span>
+        <span class="nt">&lt;menuitem</span> <span class="na">id=</span><span class="s">&quot;main_openacademy_menu&quot;</span> <span class="na">name=</span><span class="s">&quot;Open Academy&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- A first level in the left side menu is needed</span>
+<span class="c">             before using action= attribute --&gt;</span>
+        <span class="nt">&lt;menuitem</span> <span class="na">id=</span><span class="s">&quot;openacademy_menu&quot;</span> <span class="na">name=</span><span class="s">&quot;Open Academy&quot;</span>
+                  <span class="na">parent=</span><span class="s">&quot;main_openacademy_menu&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- the following menuitem should appear *after*</span>
+<span class="c">             its parent openacademy_menu and *after* its</span>
+<span class="c">             action course_list_action --&gt;</span>
+        <span class="nt">&lt;menuitem</span> <span class="na">id=</span><span class="s">&quot;courses_menu&quot;</span> <span class="na">name=</span><span class="s">&quot;Courses&quot;</span> <span class="na">parent=</span><span class="s">&quot;openacademy_menu&quot;</span>
+                  <span class="na">action=</span><span class="s">&quot;course_list_action&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- Full id location:</span>
+<span class="c">             action=&quot;openacademy.course_list_action&quot;</span>
+<span class="c">             It is not required when it is the same module --&gt;</span>
+    <span class="nt">&lt;/data&gt;</span>
+<span class="nt">&lt;/openerp&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="defina-um-visoes-personalizado">
+<h2>Defina um visões personalizado.<a class="headerlink" href="#defina-um-visoes-personalizado" title="Permalink to this headline">¶</a></h2>
+<p>Visões personalizadas definiem a forma como os dados serão exibidos e organizados nos diversões tipos de visões:</p>
+<ul class="simple">
+<li>Formulário;</li>
+<li>Gráficos;</li>
+<li>Lista;</li>
+<li>Calendário;</li>
+<li>Mapa/Geolocalização;</li>
+<li>Kanban;</li>
+<li>ETC;</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;meu_modulo_view_type&quot;</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Meu modulo Type<span class="nt">&lt;/field&gt;</span>
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>meu.modulo<span class="nt">&lt;/field&gt;</span>
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+       <span class="c">&lt;!-- view content: &lt;form&gt;, &lt;tree&gt;, &lt;graph&gt;, ... --&gt;</span>
+   <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="visao-formulario">
+<h3>Visão formulário<a class="headerlink" href="#visao-formulario" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;meu_modulo_view_form&quot;</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Meu modulo Form<span class="nt">&lt;/field&gt;</span>
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>meu.modulo<span class="nt">&lt;/field&gt;</span>
+   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;form&gt;</span>
+           <span class="nt">&lt;group&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;partner_ids&quot;</span> <span class="na">widget=</span><span class="s">&quot;many2many_tags&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;/group&gt;</span>
+           <span class="nt">&lt;group&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;date&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;/group&gt;</span>
+       <span class="nt">&lt;/form&gt;</span>
+   <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visao-lista">
+<h3>Visão lista<a class="headerlink" href="#visao-lista" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;meu_modulo_view_tree&quot;</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Meu Modulo List<span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>meu.modulo<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tree&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;date&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/tree&gt;</span>
+    <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="busca-personalizada">
+<h3>Busca personalizada<a class="headerlink" href="#busca-personalizada" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;meu_modulo_view_search&quot;</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Meu modulo Search<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>meu.modulo<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;search&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;partner_ids&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;filter</span> <span class="na">string=</span><span class="s">&quot;S/ Parceiros&quot;</span>
+                <span class="na">domain=</span><span class="s">&quot;[(&#39;partner_ids&#39;,&#39;=&#39;,False)]&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/search&gt;</span>
+    <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-customizando-um-formulario">
+<h3>Exercicio: Customizando um formulário<a class="headerlink" href="#exercicio-customizando-um-formulario" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;openerp&gt;</span>
+    <span class="nt">&lt;data&gt;</span>
+        <span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span> <span class="na">id=</span><span class="s">&quot;course_form_view&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>course.form<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>openacademy.course<span class="nt">&lt;/field&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;form</span> <span class="na">string=</span><span class="s">&quot;Course Form&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;sheet&gt;</span>
+                        <span class="nt">&lt;group&gt;</span>
+                            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+                            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span><span class="nt">/&gt;</span>
+                        <span class="nt">&lt;/group&gt;</span>
+                    <span class="nt">&lt;/sheet&gt;</span>
+                <span class="nt">&lt;/form&gt;</span>
+            <span class="nt">&lt;/field&gt;</span>
+        <span class="nt">&lt;/record&gt;</span>
+
+        <span class="c">&lt;!-- window action --&gt;</span>
+        <span class="c">&lt;!--</span>
+<span class="c">            The following tag is an action definition for a &quot;window action&quot;,</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-search-view">
+<h3>Exercicio: Search view<a class="headerlink" href="#exercicio-search-view" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span> <span class="na">id=</span><span class="s">&quot;course_search_view&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>course.search<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>openacademy.course<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;search&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/search&gt;</span>
+    <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="recordset">
+<h2>Recordset<a class="headerlink" href="#recordset" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Um objeto Recordset representa os registros em uma tabela base ou os registros resultantes da execução de uma consulta.</li>
+<li>Quando metodos definidos em um modelo são executados o atributo self é um recorset.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">do_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">print</span> <span class="bp">self</span> <span class="c1"># =&gt; a.model(1, 2, 3, 4, 5)</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">record</span> <span class="c1"># =&gt; a.model(1), then a.model(2), then a.model(3), ...</span>
+</pre></div>
+</div>
+<div class="section" id="acesso-aos-campos">
+<h3>Acesso aos campos<a class="headerlink" href="#acesso-aos-campos" title="Permalink to this headline">¶</a></h3>
+<p><strong>Recordsets proveem um padrão denominado &#8220;Active-Record&#8221;</strong>:</p>
+<p>Em Engenharia de software, active record é um padrão de projeto encontrado em softwares que armazenam seus dados em Banco de dados relacionais. Assim foi nomeado por Martin Fowler em seu livro Patterns of Enterprise Application Architecture[1].</p>
+<p>A interface de um certo objeto deve incluir funções como por exemplo:</p>
+<ul class="simple">
+<li>Inserir(Insert) / Atualizar(Update) / Apagar(Delete);</li>
+<li>Propriedades que correspondam de certa forma diretamente às colunas do banco de dados associado.</li>
+</ul>
+<p>Portanto modelos podem ser escritos e lidos de forma direta através de um record.</p>
+<p>Mas somente nos singletons(apenas uma instancia de model). Setar um field dispara um update no banco de dados. Exemplo</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="o">.</span><span class="n">name</span>
+<span class="go">Example Name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="o">.</span><span class="n">company_id</span><span class="o">.</span><span class="n">name</span>
+<span class="go">Company Name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Bob&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">record</span><span class="o">.</span><span class="n">do_operation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-ipython">
+<h3>Exercicio: ipython<a class="headerlink" href="#exercicio-ipython" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nb">bin</span><span class="o">/</span><span class="n">ipython_openerp</span>     <span class="c1">#execute na raiz do odoo</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;res.groups&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">search</span><span class="p">([])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">r</span><span class="p">:</span>
+<span class="o">...</span>     <span class="n">b</span><span class="o">.</span><span class="n">name</span>
+<span class="o">...</span>
+<span class="s1">u&#39;Access Rights&#39;</span>
+<span class="s1">u&#39;Contact Creation&#39;</span>
+<span class="s1">u&#39;Employee&#39;</span>
+<span class="s1">u&#39;Manager&#39;</span>
+<span class="s1">u&#39;Multi Companies&#39;</span>
+<span class="s1">u&#39;Multi Currencies&#39;</span>
+<span class="s1">u&#39;Notes / Fancy mode&#39;</span>
+<span class="s1">u&#39;Portal&#39;</span>
+<span class="s1">u&#39;Public&#39;</span>
+<span class="s1">u&#39;Settings&#39;</span>
+<span class="s1">u&#39;Shared Group&#39;</span>
+<span class="s1">u&#39;Technical Features&#39;</span>
+<span class="s1">u&#39;User&#39;</span>
+<span class="s1">u&#39;User</span>
+</pre></div>
+</div>
+<p>Filtrando recordsets:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">recset</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="k">lambda</span> <span class="n">record</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">company_id</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">company_id</span><span class="p">)</span>
+<span class="c1"># or using string</span>
+<span class="n">recset</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;product_id.can_be_sold&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ordenando:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># sort records by name</span>
+<span class="n">recset</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Map:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">recset</span><span class="o">.</span><span class="n">mapped</span><span class="p">(</span><span class="k">lambda</span> <span class="n">record</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">price_unit</span> <span class="o">-</span> <span class="n">record</span><span class="o">.</span><span class="n">cost_price</span><span class="p">)</span>
+
+<span class="c1"># returns a list of name</span>
+<span class="n">recset</span><span class="o">.</span><span class="n">mapped</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+
+<span class="c1"># returns a recordset of partners</span>
+<span class="n">recset</span><span class="o">.</span><span class="n">mapped</span><span class="p">(</span><span class="s1">&#39;invoice_id.partner_id&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">mapped</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+<span class="go">res.users(1, 4)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">mapped</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+<span class="go">[u&#39;Access Rights&#39;, u&#39;Contact Creation&#39;, u&#39;Employee&#39;, u&#39;Manager&#39;,</span>
+<span class="go">u&#39;Multi Companies&#39;, u&#39;Multi Currencies&#39;, u&#39;Notes / Fancy mode&#39;, u&#39;Portal&#39;,</span>
+<span class="go">u&#39;Public&#39;, u&#39;Settings&#39;, u&#39;Shared Group&#39;, u&#39;Technical Features&#39;, u&#39;User&#39;,</span>
+<span class="go">u&#39;User&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="o-atributo-ids">
+<h2>O atributo ids<a class="headerlink" href="#o-atributo-ids" title="Permalink to this headline">¶</a></h2>
+<p>Ids é um atributo especial do recorset.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span><span class="o">.</span><span class="n">ids</span>
+<span class="go">[3, 11, 5, 10, 6, 7, 12, 1, 2, 4, 14, 8, 9, 13]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">groups</span>
+<span class="go">res.groups(3, 11, 5, 10, 6, 7, 12, 1, 2, 4, 14, 8, 9, 13)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="acoes-comuns">
+<h1>Acões comuns<a class="headerlink" href="#acoes-comuns" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pesquisa">
+<h2>Pesquisa<a class="headerlink" href="#pesquisa" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">([(</span><span class="s1">&#39;is_company&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])</span>
+<span class="go">res.partner(7, 6, 18, 12, 14, 17, 19, 8,...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">search</span><span class="p">([(</span><span class="s1">&#39;is_company&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;Camptocamp&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;res.users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">search</span><span class="p">([(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">)])</span>
+<span class="go">res.users(1,)</span>
+</pre></div>
+</div>
+<p>Exemplo</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>In [59]: partner.search([], order=&#8217;name&#8217;, limit=10)</dt>
+<dd><p class="first">Out[59]: res.partner(31, 30, 29, 28, 27, 26, 24, 23, 22, 21)</p>
+<p>In [63]: partner.search([], limit=10, offset=20)
+Out[63]: res.partner(12, 13, 14, 15, 18, 16, 38, 53, 52, 39)</p>
+<p>In [64]: partner.search([], limit=10, offset=10)
+Out[64]: res.partner(20, 19, 18, 17, 16, 15, 14, 13, 12, 11)</p>
+<p>In [68]: obj = partner.search([], limit=1)</p>
+<p class="last">In [69]: obj.name
+Out[69]: u&#8217;EMPRESA&#8217;</p>
+</dd>
+</dl>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Todos os registros utilizamos o dominio vazio.</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="n">partner</span><span class="o">.</span><span class="n">search</span><span class="p">([])</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">72</span><span class="p">]:</span> <span class="n">res</span><span class="o">.</span><span class="n">partner</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">58</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">71</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Tipos de operadores</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;!=&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;=&#39;</span><span class="p">,</span> <span class="s1">&#39;=?&#39;</span><span class="p">,</span> <span class="s1">&#39;=like&#39;</span><span class="p">,</span> <span class="s1">&#39;=ilike&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;not like&#39;</span><span class="p">,</span> <span class="s1">&#39;ilike&#39;</span><span class="p">,</span> <span class="s1">&#39;not ilike&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;not in&#39;</span><span class="p">,</span> <span class="s1">&#39;child_of&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="browsing">
+<h2>Browsing<a class="headerlink" href="#browsing" title="Permalink to this headline">¶</a></h2>
+<p>Browsing é o forma padrão de se retornar dados do banco de dados, ele retorna um recordset:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">browse</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">res.partner(1, 2, 3)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing">
+<h2>Writing<a class="headerlink" href="#writing" title="Permalink to this headline">¶</a></h2>
+<p><strong>Using Active Record pattern</strong></p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@api.one</span>
+<span class="k">def</span> <span class="nf">any_write</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="from-record">
+<h2>From Record<a class="headerlink" href="#from-record" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@api.one</span>
+<span class="o">...</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">value</span> <span class="p">})</span>
+<span class="c1"># or</span>
+<span class="n">record</span><span class="o">.</span><span class="n">write</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="from-recordset">
+<h2>From RecordSet<a class="headerlink" href="#from-recordset" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@api.multi</span>
+<span class="o">...</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">value</span> <span class="p">})</span>
+<span class="c1"># It will write on all record.</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">line_ids</span><span class="o">.</span><span class="n">write</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">value</span> <span class="p">})</span>
+</pre></div>
+</div>
+<p>It will write on all Records of the relation line_ids</p>
+<div class="section" id="exercicio-relacionamentos-entre-modelos">
+<h3>Exercicio: Relacionamentos entre modelos<a class="headerlink" href="#exercicio-relacionamentos-entre-modelos" title="Permalink to this headline">¶</a></h3>
+<p>Crie um modelo para sessao do curso:
+- Um curso pode ser ministrado em determinada data;
+- Um curso deve ter um alunos inscritos alvo;</p>
+<p>Cada sessão deve ter:
+- Um nome;
+- Um número de lugares;
+- Uma data de início;
+- Duração em dias;</p>
+<ul class="simple">
+<li>Adicione uma ação e um item de menu para exibi-los.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Session</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">_name</span> <span class="o">=</span> <span class="s1">&#39;openacademy.session&#39;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">start_date</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Float</span><span class="p">(</span><span class="n">digits</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Duration in days&quot;</span><span class="p">)</span>
+    <span class="n">seats</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">string</span><span class="o">=</span><span class="s2">&quot;Number of seats&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span> <span class="na">id=</span><span class="s">&quot;session_form_view&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>session.form<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>openacademy.session<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;form</span> <span class="na">string=</span><span class="s">&quot;Session Form&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;sheet&gt;</span>
+                <span class="nt">&lt;group&gt;</span>
+                    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;start_date&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;duration&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;seats&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;/group&gt;</span>
+            <span class="nt">&lt;/sheet&gt;</span>
+        <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+
+<span class="nt">&lt;record</span> <span class="na">model=</span><span class="s">&quot;ir.actions.act_window&quot;</span> <span class="na">id=</span><span class="s">&quot;session_list_action&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Sessions<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;res_model&quot;</span><span class="nt">&gt;</span>openacademy.session<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;view_type&quot;</span><span class="nt">&gt;</span>form<span class="nt">&lt;/field&gt;</span>
+    <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;view_mode&quot;</span><span class="nt">&gt;</span>tree,form<span class="nt">&lt;/field&gt;</span>
+<span class="nt">&lt;/record&gt;</span>
+
+<span class="nt">&lt;menuitem</span> <span class="na">id=</span><span class="s">&quot;session_menu&quot;</span> <span class="na">name=</span><span class="s">&quot;Sessions&quot;</span>
+          <span class="na">parent=</span><span class="s">&quot;openacademy_menu&quot;</span>
+          <span class="na">action=</span><span class="s">&quot;session_list_action&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-relacionamentos-many2one">
+<h3>Exercicio: Relacionamentos Many2One<a class="headerlink" href="#exercicio-relacionamentos-many2one" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>Adicone um relacionamento many2one entre Curso e Sessão.</dt>
+<dd><ul class="first last simple">
+<li>Um curso deve ter um usuário responsável. Para tal deve ter um relacionamento com o modelo embutido res.users.</li>
+<li>A sessão deve ter um instrutor, Para tal deve ter um relacionamento com o modelo embutido res.partner.</li>
+<li>Uma sessão deve ser relacionada a um curso. Para tal deve ter um relacionamento com o modelo que criamos openacademy.course.</li>
+</ul>
+</dd>
+</dl>
+<p>Adapte os modelos e as visões.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Course</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">responsible_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="s1">&#39;res.users&#39;</span><span class="p">,</span>
+        <span class="n">ondelete</span><span class="o">=</span><span class="s1">&#39;set null&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Responsible&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="k">class</span> <span class="nc">Session</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+        <span class="n">instructor_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="s1">&#39;res.partner&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Instructor&quot;</span><span class="p">)</span>
+        <span class="n">course_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="s1">&#39;openacademy.course&#39;</span><span class="p">,</span>
+            <span class="n">ondelete</span><span class="o">=</span><span class="s1">&#39;cascade&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Course&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-relacionamentos-one2many">
+<h3>Exercicio: Relacionamentos One2Many<a class="headerlink" href="#exercicio-relacionamentos-one2many" title="Permalink to this headline">¶</a></h3>
+<p>Relacionamento inverso entre curso e sessões:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Course</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">responsible_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2one</span><span class="p">(</span><span class="s1">&#39;res.users&#39;</span><span class="p">,</span>
+        <span class="n">ondelete</span><span class="o">=</span><span class="s1">&#39;set null&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Responsible&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">session_ids</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">One2many</span><span class="p">(</span>
+        <span class="s1">&#39;openacademy.session&#39;</span><span class="p">,</span> <span class="s1">&#39;course_id&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Sessions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercicio-relacionamentos-many2many">
+<h3>Exercicio: Relacionamentos Many2Many<a class="headerlink" href="#exercicio-relacionamentos-many2many" title="Permalink to this headline">¶</a></h3>
+<p>Relacionamento entre Parceiros e Sessões:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">attendee_ids</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Many2many</span><span class="p">(</span><span class="s1">&#39;res.partner&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="s2">&quot;Attendees&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/develop.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, Luis Felipe Mileo&lt;mileo@kmee.com.br&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

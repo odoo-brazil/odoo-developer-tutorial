@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Instalação &#8212; Tutorial Odoo 2016.10.13 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/oca.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.10.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Tutorial Odoo 2016.10.13 documentation" href="index.html" />
+    <link rel="next" title="Introdução a Criação de modulos" href="develop.html" />
+    <link rel="prev" title="Sobre o Odoo" href="ecosystem.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/brazil.png"></span>
+          Tutorial Odoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>2016.10.13</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ecosystem.html">Sobre o Odoo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#o-odoo">O Odoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#historia">História</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#oca">OCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#desenvolvendo-com-odoo">Desenvolvendo com Odoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#exemplo-backend-views">Exemplo: Backend Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#backend-code-models">Backend Code: Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#backend-code-views">Backend Code: Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#frontend-views">Frontend Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#front-end-code-rotas">Front-End Code: Rotas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ecosystem.html#front-end-code-views">Front-End Code: Views</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instalação</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Instalação</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="develop.html">Introdução a Criação de modulos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#objetivo">Objetivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#arquivo-de-manifesto">Arquivo de Manifesto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#estrutura-de-arquivos-do-modulo">Estrutura de arquivos do modulo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#mapeamento-objeto-relacional">Mapeamento Objeto relacional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#model-fields">Model Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#dados">Dados:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#adicionando-acoes-e-menus">Adicionando Ações e menus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#defina-um-visoes-personalizado">Defina um visões personalizado.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#recordset">Recordset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#o-atributo-ids">O atributo ids</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="develop.html#acoes-comuns">Acões comuns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#pesquisa">Pesquisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#browsing">Browsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#writing">Writing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#from-record">From Record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#from-recordset">From RecordSet</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links importantes</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="ecosystem.html" title="Previous Chapter: Sobre o Odoo"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Sobre o Odoo</span>
+    </a>
+  </li>
+  <li>
+    <a href="develop.html" title="Next Chapter: Introdução a Criação de modulos"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Introdução a ... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="instalacao">
+<h1>Instalação<a class="headerlink" href="#instalacao" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Instalação<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Acesse: <a class="reference external" href="https://github.com/odoo-brazil/odoo-developer-tutorial">https://github.com/odoo-brazil/odoo-developer-tutorial</a></li>
+<li>Faça um fork do repositório</li>
+<li>Clone o seu fork e instale as dependências:</li>
+</ol>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>git clone git@github.com:user/odoo-developer-tutorial.git
+<span class="nb">cd</span> odoo-developer-tutorial
+sh dependencies.sh
+</pre></div>
+</div>
+<div class="section" id="buildout">
+<h3>Buildout<a class="headerlink" href="#buildout" title="Permalink to this headline">¶</a></h3>
+<p>Iniciando o buildout</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>virtualenv . --system-site-packages
+bin/pip install --upgrade pip setuptools zc.buildout
+</pre></div>
+</div>
+<p>Crie um arquivo buildout.cfg com o conteúdo:</p>
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">buildout</span><span class="p">]</span>
+<span class="n">extends</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">cfg</span> 
+
+<span class="c1">#[openerp]</span>
+<span class="c1">#options.db_user = odoo</span>
+<span class="c1">#options.db_password = odoo</span>
+<span class="c1">#options.db_host = localhost</span>
+<span class="c1">#options.db_port = 5432</span>
+</pre></div>
+</td></tr></table></div>
+<p>Execute o comando para realizar o download do Odoo e suas dependências:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>bin/buildout
+</pre></div>
+</div>
+<p>Inicie o odoo com:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span>bin/start_odoo
+</pre></div>
+</div>
+<ul class="simple">
+<li>Acesse: <a class="reference external" href="https://localhost:8069">https://localhost:8069</a></li>
+<li>Login: admin</li>
+<li>senha: admin</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/install.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, Luis Felipe Mileo&lt;mileo@kmee.com.br&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

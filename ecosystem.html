@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sobre o Odoo &#8212; Tutorial Odoo 2016.10.13 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.3.6/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/oca.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016.10.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="Tutorial Odoo 2016.10.13 documentation" href="index.html" />
+    <link rel="next" title="Instalação" href="install.html" />
+    <link rel="prev" title="Tutorial Odoo" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/brazil.png"></span>
+          Tutorial Odoo</a>
+        <span class="navbar-text navbar-version pull-left"><b>2016.10.13</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sobre o Odoo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#o-odoo">O Odoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historia">História</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#oca">OCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desenvolvendo-com-odoo">Desenvolvendo com Odoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemplo-backend-views">Exemplo: Backend Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#backend-code-models">Backend Code: Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#backend-code-views">Backend Code: Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frontend-views">Frontend Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#front-end-code-rotas">Front-End Code: Rotas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#front-end-code-views">Front-End Code: Views</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Instalação</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#id1">Instalação</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="develop.html">Introdução a Criação de modulos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#objetivo">Objetivo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#arquivo-de-manifesto">Arquivo de Manifesto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#estrutura-de-arquivos-do-modulo">Estrutura de arquivos do modulo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#mapeamento-objeto-relacional">Mapeamento Objeto relacional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#model-fields">Model Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#dados">Dados:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#adicionando-acoes-e-menus">Adicionando Ações e menus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#defina-um-visoes-personalizado">Defina um visões personalizado.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#recordset">Recordset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#o-atributo-ids">O atributo ids</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="develop.html#acoes-comuns">Acões comuns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#pesquisa">Pesquisa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#browsing">Browsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#writing">Writing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#from-record">From Record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="develop.html#from-recordset">From RecordSet</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Links importantes</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Tutorial Odoo"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Tutorial Odoo</span>
+    </a>
+  </li>
+  <li>
+    <a href="install.html" title="Next Chapter: Instalação"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Instalação &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="sobre-o-odoo">
+<h1>Sobre o Odoo<a class="headerlink" href="#sobre-o-odoo" title="Permalink to this headline">¶</a></h1>
+<p>Um pouco de arquitetura, historia e experiências.</p>
+<div class="section" id="o-odoo">
+<h2>O Odoo<a class="headerlink" href="#o-odoo" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Fazendo companhias um lugar melhor. Um app por vez.</div></blockquote>
+<p>Odoo é uma plataforma de codigo aberto de aplicativos de gestão empresárial.</p>
+<ul class="simple">
+<li>Utilizado por grandes companhias, pequenas empresas e diferentes tipos de negócios de organizações de for a auxilia-los a gerenciar, automatizar, medir e otimizar suas operações, finanças e projetos.</li>
+</ul>
+</div>
+<div class="section" id="historia">
+<h2>História<a class="headerlink" href="#historia" title="Permalink to this headline">¶</a></h2>
+<p>2005</p>
+<ul class="simple">
+<li>&#8220;Então, em 2005, eu comecei a desenvolver o TinyERP..&#8221;</li>
+<li>&#8220;Para fazer as coisas acontecer, eu trabalhei duro, muito duro. Eu trabalhei 13 horas por dia, 7 dias por semana, sem férias por 7 anos.</li>
+<li>Pode imaginar qual pequeno eu me senti quando um dos diretores da Danone me perguntou: Por que eu deveria pagar milhoes de dolares em um pequeno(Tiny) software</li>
+</ul>
+<p>2010</p>
+<ul class="simple">
+<li>OpenERP um produto poderoso, porem feio;</li>
+<li>O pivo/mudança de estratégia: Empresa de serviços se tornou um editor de software;</li>
+<li>9.8 milhoes de Euros: Pesquisa e desenvolvimento / Equipe de vendas / 500 parceiros / 100 paises:</li>
+<li>Contratos com 6 zeros.</li>
+</ul>
+<p>Então, o sonho começou a se tornar realidade. Começamos a ter pistas de que o que fizemos poderia mudar o mundo</p>
+<ul class="simple">
+<li>Com 1000 instaçoes por dia, nos tornamos o software de gerenciamento com mais instaçoes por dia.</li>
+<li>Analistas das 4 maiores empresas de contabilidade (EY, PwC, Deloitte e KPMG) começaram a preferir o Odoo ao invés do SAP</li>
+<li>OpenERP é agora uma disciplina obrigatória para o bacharelado em França como o Word, Excel e PowerPoint</li>
+<li>60 novos módulos são liberados a cada mês (que se tornou o wikipedia do software de gestão, graças à nossa comunidade forte)</li>
+</ul>
+<p>2013</p>
+<ul class="simple">
+<li>Tivemos 2.000.000 usuários no mundo inteiro;</li>
+<li>Algo estava acontecendo ... E era grande! Novos financiamentos em 2014;</li>
+<li>Depois de anos de crescimento rápido, conseguimos mais um gol incrível;</li>
+<li>USD 10 Milhões de financiamento;</li>
+</ul>
+<p>2014</p>
+<ul class="simple">
+<li>A ascensão do Openerp</li>
+<li>Muito além das tradicionais de ERP;</li>
+<li>Em junho de 2014, lançou a versão 8 com uma incrível CMS e eCommerce, um ponto de venda, um motor integrado de Business Intelligence e muito mais. (e 3000 módulos);</li>
+<li>Mudamos o nome da empresa e do produto para Odoo. E uma nova história apenas começou ...</li>
+</ul>
+<p>Fonte: <a class="reference external" href="https://www.odoo.com/blog/odoo-news-5/post/the-odoo-story-56">https://www.odoo.com/blog/odoo-news-5/post/the-odoo-story-56</a></p>
+</div>
+<div class="section" id="oca">
+<h2>OCA<a class="headerlink" href="#oca" title="Permalink to this headline">¶</a></h2>
+<p>O que tornou o Odoo grande? Comunidade!</p>
+<div class="code highlight-default"><div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># © 2016 Daniel Torres</span>
+<span class="c1">#  License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html</span>
+<span class="c1"># Import odoo community association</span>
+<span class="kn">from</span> <span class="nn">oca</span> <span class="k">import</span> <span class="n">indio</span>
+</pre></div>
+</div>
+<div class="section" id="the-odoo-community-association">
+<h3>The Odoo Community Association<a class="headerlink" href="#the-odoo-community-association" title="Permalink to this headline">¶</a></h3>
+<p>Associação da comunidade Odoo, ou OCA, é uma organização sem fins lucrativos
+cuja a missão é promover o uso generalizado do Odoo e apoiar o desenvolvimento
+colaborativo de recursos do Odoo.</p>
+<ul class="simple">
+<li>Apoio finaneiro;</li>
+<li>Suporte legal e organizacional a comunidade codigo aberto odoo;</li>
+<li>Independente dos interesses da Odoo SA;</li>
+</ul>
+</div>
+<div class="section" id="oca-objetivos">
+<h3>OCA: Objetivos<a class="headerlink" href="#oca-objetivos" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Promover a colaboraçao</li>
+<li>Coordernar</li>
+<li>Defender os interesses</li>
+<li>Divulgar o Odoo</li>
+<li>Facilitar: Sinergia, colaboraçao e levantar fundos</li>
+<li>Roadmaps, implementaçao</li>
+</ul>
+</div>
+<div class="section" id="oca-organizacao">
+<h3>OCA: Organização<a class="headerlink" href="#oca-organizacao" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/oca-structure.jpg" class="align-center" src="_images/oca-structure.jpg" />
+</div>
+<div class="section" id="oca-links-importantes">
+<h3>OCA: Links importantes<a class="headerlink" href="#oca-links-importantes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>OCA TWITTER; &#64;odoocommunity &#64;OCA_Bot</li>
+<li>OCA lists: <a class="reference external" href="https://odoo-community.org/groups">https://odoo-community.org/groups</a></li>
+<li>OCA Membership: <a class="reference external" href="https://odoo-community.org/page/Membership">https://odoo-community.org/page/Membership</a></li>
+<li>OCA lists: <a class="reference external" href="https://odoo-community.org/groups">https://odoo-community.org/groups</a></li>
+<li>Blog: <a class="reference external" href="https://odoo-community.org/blog/oca-news-1">https://odoo-community.org/blog/oca-news-1</a></li>
+</ul>
+</div>
+<div class="section" id="odoo-no-brasil">
+<h3>Odoo no Brasil<a class="headerlink" href="#odoo-no-brasil" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Localização Brasileira é mantida pela OCA;</li>
+<li>Código: <a class="reference external" href="https://github.com/oca/l10n-brazil">https://github.com/oca/l10n-brazil</a></li>
+<li>Lista: <a class="reference external" href="https://www.odoo-community.org/groups/brazil-12">https://www.odoo-community.org/groups/brazil-12</a></li>
+</ul>
+</div>
+<div class="section" id="como-contribuir">
+<h3>Como contribuir?<a class="headerlink" href="#como-contribuir" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>Talk is cheap, show me the code!</div></blockquote>
+<p>&#8211; Linus Torvalds</p>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Entenda as regras</dt>
+<dd><ul class="first last simple">
+<li>Odoo: <a class="reference external" href="https://github.com/odoo/odoo/wiki/Contributing">https://github.com/odoo/odoo/wiki/Contributing</a></li>
+<li>OCA: <a class="reference external" href="https://odoo-community.org/page/review">https://odoo-community.org/page/review</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Siga as regras</p>
+</li>
+<li><p class="first">Faça pelos outros para que eles façam por voce;</p>
+</li>
+</ol>
+<p>&#8220;Gaste o seu tempo de espera revendo as contribuições dos outros &#8220;[...] As coisas mais interessantes que aprendi sobre programação em geral e especificamente em Odoo era por ter o meu código revisto ou revendo o código de outras pessoas.&#8221;
+&#8211; Holger Brunn, membro da comunidade.</p>
+</div>
+<div class="section" id="arquitetura">
+<h3>Arquitetura<a class="headerlink" href="#arquitetura" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Arquitetura cliente/servidor, onde os clientes são navegadores web, acessando o servidor Odoo via RPC;</li>
+<li>Mútiplos motores de relatório;</li>
+<li>Motor de workflow;</li>
+<li>Serviços web: XML-RPC / JSON-RPC;</li>
+<li>Modelos extensíveis;</li>
+<li>Visualizações extensíveis;</li>
+<li>Relatórios extensíveis;</li>
+</ul>
+<ul>
+<li><dl class="first docutils">
+<dt>Multipla visualização de dados:</dt>
+<dd><ul class="first last simple">
+<li>Calendário;</li>
+<li>Kanban;</li>
+<li>Gráfico;</li>
+<li>Cubo;</li>
+<li>Mapa;</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<ul>
+<li><dl class="first docutils">
+<dt>Conectores:</dt>
+<dd><ul class="first last simple">
+<li>AccountEDGE (MyOB);</li>
+<li>CMIS (Affresco, Nuexo);</li>
+<li>Plataforma de e-commerce (Magento, PrestaShop, WooCommerce);</li>
+<li>Redmine;</li>
+<li>Sage;</li>
+<li>Salesforce;</li>
+<li>Telefonia (Asterisk);</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="_images/odoo-arch.png" class="align-center" src="_images/odoo-arch.png" />
+</div>
+</div>
+<div class="section" id="desenvolvendo-com-odoo">
+<h2>Desenvolvendo com Odoo<a class="headerlink" href="#desenvolvendo-com-odoo" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>É uma otima plataforma para se desenvolver;</li>
+<li>Comunidade com os mesmos costumes da comunidade python!</li>
+<li>O core do framework é muito bom, te ajuda muito!</li>
+<li>Permite a contrução de aplicações do Zero;</li>
+<li>E adapatar aplicativos existentes para as suas necessidades através de uma mecanismo de extensão modular.</li>
+<li>A Versão 8 trouxe uma gama de novas possibilidades ao adicionar recursos para se desenvolver sites.</li>
+</ul>
+<p>Problemas:</p>
+<ul class="simple">
+<li>O software e bem grande e e normal os ingressantes se sentirem um pouco perdidos.</li>
+<li>Durante anos, os desenvolvedores Odoo aprenderam seu oficio atraves da leitura do codigo fonte do core.</li>
+<li>Apesar de ser uma tecnica efetiva, e um processo demorado e voce acaba ficando sujeito a muitos erros.</li>
+</ul>
+</div>
+<div class="section" id="exemplo-backend-views">
+<h2>Exemplo: Backend Views<a class="headerlink" href="#exemplo-backend-views" title="Permalink to this headline">¶</a></h2>
+<img alt="_images/backend2.png" class="align-center" src="_images/backend2.png" />
+</div>
+<div class="section" id="backend-code-models">
+<h2>Backend Code: Models<a class="headerlink" href="#backend-code-models" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ProjectTask</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Char</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span>
+    <span class="n">date_start</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s1">&#39;Date Start&#39;</span><span class="p">)</span>
+    <span class="n">date_end</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">(</span><span class="s1">&#39;Date End&#39;</span><span class="p">)</span>
+    <span class="n">stage_id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">One2many</span><span class="p">(</span><span class="s1">&#39;Stage&#39;</span><span class="p">,</span> <span class="s1">&#39;project.task.stage&#39;</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="nd">@api.onchange</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_onchange_user</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="nd">@api.multi</span>
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="o">...</span>
+    <span class="nd">@api.constrains</span><span class="p">(</span><span class="s1">&#39;date_start&#39;</span><span class="p">,</span> <span class="s1">&#39;date_end&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_check_dates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="k">lambda</span> <span class="n">task</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">date_start</span> <span class="ow">and</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">date_end</span> <span class="ow">and</span> <span class="n">task</span><span class="o">.</span><span class="n">date_start</span> <span class="o">&gt;</span> <span class="n">task</span><span class="o">.</span><span class="n">date_end</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">ValidationError</span><span class="p">(</span>
+            <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Error !))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="backend-code-views">
+<h2>Backend Code: Views<a class="headerlink" href="#backend-code-views" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;act_project_project_2_project_task_all&quot;</span> <span class="na">model=</span><span class="s">&quot;ir.actions.act_window&quot;</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Tasks<span class="nt">&lt;/field&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;res_model&quot;</span><span class="nt">&gt;</span>project.task<span class="nt">&lt;/field&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;view_mode&quot;</span><span class="nt">&gt;</span>kanban,tree,form,calendar,pivot,graph<span class="nt">&lt;/field&gt;</span>
+ <span class="nt">&lt;/record&gt;</span>
+
+ <span class="nt">&lt;menuitem</span> <span class="na">action=</span><span class="s">&quot;action_view_task&quot;</span> <span class="na">id=</span><span class="s">&quot;menu_action_view_task&quot;</span> <span class="na">parent=</span><span class="s">&quot;project.menu_project_management&quot;</span> <span class="na">sequence=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+
+ <span class="nt">&lt;record</span> <span class="na">id=</span><span class="s">&quot;view_task_tree2&quot;</span> <span class="na">model=</span><span class="s">&quot;ir.ui.view&quot;</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>project.task.tree<span class="nt">&lt;/field&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;model&quot;</span><span class="nt">&gt;</span>project.task<span class="nt">&lt;/field&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">eval=</span><span class="s">&quot;2&quot;</span> <span class="na">name=</span><span class="s">&quot;priority&quot;</span><span class="nt">/&gt;</span>
+       <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;arch&quot;</span> <span class="na">type=</span><span class="s">&quot;xml&quot;</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;tree</span> <span class="na">decoration-bf=</span><span class="s">&quot;message_needaction==True&quot;</span> <span class="na">decoration-danger=</span><span class="s">&quot;date_deadline and (date_deadline&amp;lt;current_date)&quot;</span> <span class="na">string=</span><span class="s">&quot;Tasks&quot;</span><span class="nt">&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;message_needaction&quot;</span> <span class="na">invisible=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;sequence&quot;</span> <span class="na">invisible=</span><span class="s">&quot;not context.get(&#39;seq_visible&#39;, False)&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;project_id&quot;</span> <span class="na">invisible=</span><span class="s">&quot;context.get(&#39;user_invisible&#39;, False)&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;user_id&quot;</span> <span class="na">invisible=</span><span class="s">&quot;context.get(&#39;user_invisible&#39;, False)&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;planned_hours&quot;</span> <span class="na">invisible=</span><span class="s">&quot;context.get(&#39;set_visible&#39;,False)&quot;</span> <span class="na">groups=</span><span class="s">&quot;project.group_time_work_estimation_tasks&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;date_deadline&quot;</span> <span class="na">invisible=</span><span class="s">&quot;context.get(&#39;deadline_visible&#39;,True)&quot;</span><span class="nt">/&gt;</span>
+               <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;stage_id&quot;</span> <span class="na">invisible=</span><span class="s">&quot;context.get(&#39;set_visible&#39;,False)&quot;</span><span class="nt">/&gt;</span>
+           <span class="nt">&lt;/tree&gt;</span>
+       <span class="nt">&lt;/field&gt;</span>
+   <span class="nt">&lt;/record&gt;</span>
+ [...]
+</pre></div>
+</div>
+</div>
+<div class="section" id="frontend-views">
+<h2>Frontend Views<a class="headerlink" href="#frontend-views" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Responsivo</li>
+</ul>
+<img alt="_images/my-tasks.jpg" class="align-center" src="_images/my-tasks.jpg" />
+</div>
+<div class="section" id="front-end-code-rotas">
+<h2>Front-End Code: Rotas<a class="headerlink" href="#front-end-code-rotas" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">website_user_tasks</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">Controller</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">_prepare_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="n">my_tasks</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;project.task&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">search</span><span class="p">([</span>
+        <span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">uid</span><span class="p">)</span>
+    <span class="p">])</span>
+    <span class="k">return</span> <span class="n">my_tasks</span>
+
+<span class="nd">@http.route</span><span class="p">([</span><span class="s1">&#39;/my/tasks&#39;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="n">website</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">post</span><span class="p">):</span>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tasks&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_tasks</span><span class="p">()}</span>
+    <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">website</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;website_user_tasks.tasks_only&quot;</span><span class="p">,</span> <span class="n">tasks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="front-end-code-views">
+<h2>Front-End Code: Views<a class="headerlink" href="#front-end-code-views" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;template</span> <span class="na">id=</span><span class="s">&quot;tasks&quot;</span> <span class="na">name=</span><span class="s">&quot;Minhas Tarefas&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3</span> <span class="nt">&gt;</span>Suas Tarefas<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;t</span> <span class="na">t-if=</span><span class="s">&quot;not tasks&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Nao existem tarefas disponiveis.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/t&gt;</span>
+    <span class="nt">&lt;t</span> <span class="na">t-if=</span><span class="s">&quot;tasks&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;table-responsive&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">&quot;table table-hover o_my_status_table&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;thead&gt;</span>
+                  <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">&quot;active&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;th&gt;</span>Task Code#<span class="nt">&lt;/th&gt;</span>
+                    <span class="nt">&lt;th&gt;</span>Nome<span class="nt">&lt;/th&gt;</span>
+                    <span class="nt">&lt;th&gt;</span>Inicio<span class="nt">&lt;/th&gt;</span>
+                    <span class="nt">&lt;th&gt;</span>Fim<span class="nt">&lt;/th&gt;</span>
+                    <span class="nt">&lt;th&gt;</span>Situacao<span class="nt">&lt;/th&gt;</span>
+                  <span class="nt">&lt;/tr&gt;</span>
+                <span class="nt">&lt;/thead&gt;</span>
+                <span class="nt">&lt;t</span> <span class="na">t-foreach=</span><span class="s">&quot;tasks&quot;</span> <span class="na">t-as=</span><span class="s">&quot;task&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;tr&gt;</span>
+                        <span class="nt">&lt;td&gt;&lt;span</span> <span class="na">t-field=</span><span class="s">&quot;task.id&quot;</span><span class="nt">/&gt;&lt;/td&gt;</span>
+                        <span class="nt">&lt;td&gt;&lt;span</span> <span class="na">t-field=</span><span class="s">&quot;task.name&quot;</span><span class="nt">/&gt;&lt;/td&gt;</span>
+                        <span class="nt">&lt;td&gt;&lt;span</span> <span class="na">t-field=</span><span class="s">&quot;task.date_start&quot;</span><span class="nt">/&gt;&lt;/td&gt;</span>
+                        <span class="nt">&lt;td&gt;&lt;span</span> <span class="na">t-field=</span><span class="s">&quot;task.date_end&quot;</span><span class="nt">/&gt;&lt;/td&gt;</span>
+                        <span class="nt">&lt;td&gt;&lt;span</span> <span class="na">t-field=</span><span class="s">&quot;task.stage_id&quot;</span><span class="nt">/&gt;&lt;/td&gt;</span>
+
+                    <span class="nt">&lt;/tr&gt;</span>
+                <span class="nt">&lt;/t&gt;</span>
+            <span class="nt">&lt;/table&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/t&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+        <br/>
+        
+<div id="sourcelink">
+  <a href="_sources/ecosystem.txt"
+     rel="nofollow">Source</a>
+</div>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, Luis Felipe Mileo&lt;mileo@kmee.com.br&gt;.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
